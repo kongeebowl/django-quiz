@@ -2,7 +2,12 @@ from rest_framework import serializers
 from .models import Item
 
 
-class ItemSerializer(serializers.ModelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Item
+        model = Question
+        fields = '__all__'
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
         fields = '__all__'
