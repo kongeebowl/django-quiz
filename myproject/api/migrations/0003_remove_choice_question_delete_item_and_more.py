@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='question',
             name='answer_text',
-            field=models.CharField(default=django.utils.timezone.now, max_length=200),
+            field=models.CharField(blank=True,null=True, max_length=200),
             preserve_default=False,
         ),
         migrations.DeleteModel(
