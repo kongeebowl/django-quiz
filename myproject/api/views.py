@@ -5,8 +5,8 @@ from .serializers import UserSerializer
 
 
 
-from .models import Question, User,Choices
-from .serializers import QuestionSerializer, UserSerializer,ChoicesSerializer
+from .models import Question, User,Choices, Quiz
+from .serializers import QuestionSerializer, UserSerializer,ChoicesSerializer,QuizSerializer
 
 class QuestionView(APIView):
     def get(self, request):
@@ -59,3 +59,30 @@ class ChoicesView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)  
+
+
+class QuizView(APIView):
+    def get(self, request):
+        quizzes = Quiz.objects.all()
+        serializer = QuizSerializer(quizzes, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = QuizSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+class AwesomeQuizView(APIView):
+    def get(self, request, pk):
+        quizzes = Quiz.objects.filter(pk=pk)
+        serializer = QuizSerializer(quizzes, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, pk):
+        serializer = QuizSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
