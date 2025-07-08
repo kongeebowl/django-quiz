@@ -1,6 +1,6 @@
 from django.db import models
-from django.utils import timezone
-from datetime import datetime
+
+
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
@@ -9,7 +9,6 @@ class User(models.Model):
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    date_posted = models.DateTimeField('date published')
     def __str__(self):
         return self.question_text
 
