@@ -1,6 +1,18 @@
-from django.db import models
+from datetime import datetime
 
 # Create your models here.
+from django.db import models
+from django.utils import timezone
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    answer_text = models.CharField(max_length=200)
+    def __str__(self):
+        return self.question_text
+    def get_answer(self):
+        return self.answer_text
+
 
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)
