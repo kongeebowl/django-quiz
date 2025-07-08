@@ -17,7 +17,10 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
-
+class Choices(models.Model):
+    choice_text = models.CharField(max_length=150, unique=True)
+    choice_number = models.IntegerField()
+    
 
 
 

@@ -3,7 +3,7 @@ from .models import User
 
 
 
-from .models import Question, User
+from .models import Question, User,Choices
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -14,4 +14,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = '__all__'
+class ChoicesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Choices
         fields = '__all__'

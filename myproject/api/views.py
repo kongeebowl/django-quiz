@@ -5,8 +5,8 @@ from .serializers import UserSerializer
 
 
 
-from .models import Question, User
-from .serializers import QuestionSerializer, UserSerializer
+from .models import Question, User,Choices
+from .serializers import QuestionSerializer, UserSerializer,ChoicesSerializer
 
 class QuestionView(APIView):
     def get(self, request):
@@ -47,3 +47,15 @@ class UsersView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)  
 
+class ChoicesView(APIView):
+    def get(self, request):
+        users = Choices.objects.all()
+        serializer = ChoicesSerializer(users, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ChoicesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)  
