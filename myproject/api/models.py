@@ -6,3 +6,19 @@ class Item(models.Model):
     description = models.TextField()
     def __str__(self):
         return self.name
+class User(models.Model):
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    def __str__(self):
+        return self.username
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+
+
+
+
+
+
