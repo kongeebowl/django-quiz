@@ -1,15 +1,6 @@
 
-
 # Create your models here.
 from django.db import models
-
-
-
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    quiz_number = models.ForeignKey('Quiz', on_delete=models.CASCADE, related_name='questions')
-    def __str__(self):
-        return self.question_text
 
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)
@@ -28,12 +19,15 @@ class Choices(models.Model):
 class Quiz(models.Model):
     description = models.CharField(max_length=255)
     quiz_number = models.IntegerField(default=0, unique=True)
-
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='questions')
     def __str__(self):
         return self.description
-    def get_quiz_number(self):
-        return self.quiz_number
+
         
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    def __str__(self):
+        return self.question_text
 
 
 
