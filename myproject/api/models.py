@@ -15,17 +15,20 @@ class Choices(models.Model):
     def __str__(self):
         return self.choice_text
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.question_text
 
 class Quiz(models.Model):
     description = models.CharField(max_length=255)
     quiz_number = models.IntegerField(default=0, unique=True)
+    
 
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='quizzes')
 
     def __str__(self):
         return self.description
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    quiz_number = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quizzes')
+
+
+    def __str__(self):
+        return self.question_text
