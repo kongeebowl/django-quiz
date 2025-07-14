@@ -21,6 +21,13 @@ class ChoicesSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class QuizSerializer(serializers.ModelSerializer):
+
+    questions = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Question.objects.all(),
+        required=False,   
+        allow_empty=True    
+    )
     class Meta:
         model = Quiz
         fields = '__all__'
