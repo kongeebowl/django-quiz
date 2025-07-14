@@ -23,7 +23,8 @@ class Question(models.Model):
 class Quiz(models.Model):
     description = models.CharField(max_length=255)
     quiz_number = models.IntegerField(default=0, unique=True)
-    question = models.ForeignKey(Question, default=1, on_delete=models.CASCADE, related_name='questions')
+    q = models.ForeignKey(Question, default=1, on_delete=models.CASCADE, related_name='questions')
+
     def __str__(self):
         return self.description
 
