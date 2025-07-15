@@ -7,7 +7,7 @@ import { onMounted } from "vue";
 
 async function getData() {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/quizzes/");
+    const response = await fetch("http://127.0.0.1:8000/api/questions/");
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
