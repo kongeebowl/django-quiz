@@ -42,7 +42,8 @@
 </template>
 
 <script setup lang="ts">
-console.log(7)
+import { onMounted } from 'vue';
+
 </script>
 
 <style scoped>

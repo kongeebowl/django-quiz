@@ -3,13 +3,19 @@ from .models import User
 
 
 
+
+
+
 from .models import Question, User,Choices, Quiz
+
+
 
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = '__all__'
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,15 +26,18 @@ class ChoicesSerializer(serializers.ModelSerializer):
         model = Choices
         fields = '__all__'
 
+
 class QuizSerializer(serializers.ModelSerializer):
+
 
     questions = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Question.objects.all(),
-        required=False,   
+        required=False,  
         allow_empty=True    
     )
-    
+   
     class Meta:
         model = Quiz
         fields = '__all__'
+
