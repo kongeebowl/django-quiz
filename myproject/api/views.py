@@ -2,7 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer
-
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 from .models import Question, User,Choices, Quiz
@@ -86,3 +90,20 @@ class AwesomeQuizView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+class UserAuth(APIView):
+    def login_page(request):
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+        
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, 'Invalid Username')
+        
+        user = authenticate(username=username, password=password)
+        
+        if user is None:
+            messages.error(request, "Invalid Password")
+        else:
+            login(request, user)
+    
+    
