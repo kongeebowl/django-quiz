@@ -1,6 +1,6 @@
 <template>
     <div>
-     <SmallComp/>
+     <AuthPage/>
      
     </div>
 </template>
