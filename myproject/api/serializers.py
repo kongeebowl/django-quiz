@@ -28,6 +28,7 @@ class QuizSerializer(serializers.ModelSerializer):
         required=False,   
         allow_empty=True    
     )
+    
     class Meta:
         model = Quiz
         fields = '__all__'
