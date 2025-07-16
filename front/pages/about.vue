@@ -12,7 +12,7 @@
 import { onMounted, ref } from "vue";
 
 const data = ref([]);
-
+//use useFetch try ad figure it out because i get errors for some reason AUOWEGHAUIWEHAUIOWehUIOAWEHIOUEHAIOWUEHOIUAWEHOUI BHLFKBLKJSB
 async function getData() {
   try {
     const response = await fetch("http://127.0.0.1:8000/api/quizzes/");
