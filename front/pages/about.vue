@@ -1,9 +1,17 @@
 <template>
-  <div><GoonerThing /></div>
+  <div>
+    <GoonerThing /><QuizCard
+      v-for="question in data"
+      :key="question.id"
+      :data="question"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
+
+const data = ref([]);
 
 async function getData() {
   try {
@@ -11,7 +19,7 @@ async function getData() {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    const data = await response.json();
+    data.value = await response.json();
     console.log(data);
   } catch (error) {
     console.error("There has been a problem with your fetch operation:", error);

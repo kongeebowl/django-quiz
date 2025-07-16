@@ -9,18 +9,23 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
-class Choices(models.Model):
-    choice_text = models.CharField(max_length=150, unique=True)
-    choice_number = models.IntegerField(default=0) 
 
-    def __str__(self):
-        return self.choice_text
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
+    answer = models.CharField(max_length=150, null=True, blank=True)
 
     def __str__(self):
         return self.question_text
+
+
+class Choices(models.Model):
+    choice_text = models.CharField(max_length=150, unique=True)
+    choice_number = models.IntegerField(default=0) 
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='choices', null=True, blank=True)
+
+    def __str__(self):
+        return self.choice_text
 
 class Quiz(models.Model):
     description = models.CharField(max_length=255)

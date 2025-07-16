@@ -9,7 +9,7 @@ from .models import Question, User,Choices, Quiz
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = '__all__'
+        fields = ['id', 'question_text']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
