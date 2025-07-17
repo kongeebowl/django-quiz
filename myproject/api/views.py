@@ -88,5 +88,15 @@ class QuizViewById(APIView):
         return Response(serializer.errors, status=400)
 
 class CheckQuiz(APIView):
-    def get(self, request, id):
-        quiz = Quiz.objects.filter()
+    def get(self, request, pk):
+        question = Question.objects.filter(pk=pk)
+        choices = Choices.objects.filter(pk=pk)
+        
+
+        '''
+        get the question
+        get the choices
+        compare the two == OMG
+        yahoo its working???
+        '''
+        
