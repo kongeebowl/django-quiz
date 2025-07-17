@@ -86,7 +86,27 @@ class QuizViewById(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+<<<<<<< HEAD
 
 class CheckQuiz(APIView):
     def get(self, request, id):
         quiz = Quiz.objects.filter()
+=======
+class UserAuth(APIView):
+    def login_page(request):
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+        
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, 'Invalid Username')
+        
+        user = authenticate(username=username, password=password)
+        
+        if user is None:
+            messages.error(request, "Invalid Password")
+        else:
+            login(request, user)
+    
+    
+>>>>>>> parent of aac3a95 (s)
