@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import QuestionView, UsersView, AwesomeQuestionView, ChoicesView, QuizView, AwesomeQuizView
-
+from .views import *
 
 urlpatterns = [
     path('questions/', QuestionView.as_view(), name='question_list'),
@@ -11,4 +10,5 @@ urlpatterns = [
 
     path('quizzes/', QuizView.as_view(), name='quiz_list'),
     path('quizzes/<int:pk>/', AwesomeQuizView.as_view(), name='quiz_detail'),
+    path('api/login/', LoginView.as_view()),
 ]

@@ -95,20 +95,17 @@ class AwesomeQuizView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-class UserAuth(APIView):
-    def login_page(request):
-        if request.method == "POST":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-        
-        if not User.objects.filter(username=username).exists():
-            messages.error(request, 'Invalid Username')
-        
+class LoginView(APIView):
+    authentication_classes = []  
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
         user = authenticate(username=username, password=password)
-        
-        if user is None:
-            messages.error(request, "Invalid Password")
-        else:
-            login(request, user)
+
+        if user:
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key})
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
     
     
