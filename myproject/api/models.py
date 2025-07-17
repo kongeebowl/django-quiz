@@ -20,7 +20,7 @@ class Question(models.Model):
 
 
 class Choices(models.Model):
-    choice_text = models.CharField(max_length=150, unique=True)
+    choice_text = models.CharField(max_length=150)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='choices', null=True, blank=True)
 
     def __str__(self):
