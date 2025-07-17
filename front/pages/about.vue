@@ -1,24 +1,16 @@
 <template>
-  <div><GoonerThing /></div>
+  <div>
+    <GoonerThing /><QuizCard
+      v-for="question in data"
+      :key="question.id"
+      :question="question.question_text"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+//use useFetch try ad figure it out because i get errors for some reason AUOWEGHAUIWEHAUIOWehUIOAWEHIOUEHAIOWUEHOIUAWEHOUI BHLFKBLKJSB
 
-async function getData() {
-  try {
-    const response = await fetch("http://127.0.0.1:8000/api/questions/");
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("There has been a problem with your fetch operation:", error);
-  }
-}
-
-onMounted(async () => {
-  await getData();
-});
+const { data } = await useFetch("http://127.0.0.1:8000//api/questions");
+console.log(data.value);
 </script>
