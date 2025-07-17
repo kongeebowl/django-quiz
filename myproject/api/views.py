@@ -21,7 +21,7 @@ class QuestionView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-class AwesomeQuestionView(APIView):
+class QuestionViewById(APIView):
     def get(self, request, pk):
         questions = Question.objects.filter(pk=pk)
         serializer = QuestionSerializer(questions, many=True)
@@ -74,7 +74,7 @@ class QuizView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-class AwesomeQuizView(APIView):
+class QuizViewById(APIView):
     def get(self, request, pk):
         quizzes = Quiz.objects.filter(pk=pk)
         serializer = QuizSerializer(quizzes, many=True)
@@ -86,3 +86,7 @@ class AwesomeQuizView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
+class CheckQuiz(APIView):
+    def get(self, request, id):
+        quiz = Quiz.objects.filter()

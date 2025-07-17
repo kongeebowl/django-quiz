@@ -31,16 +31,5 @@ class Quiz(models.Model):
     quiz_number = models.IntegerField(default=0, unique=True)
     questions = models.ManyToManyField(Question, related_name='quizzes')    
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        all_questions = list(Question.objects.all())
-
-        num_questions = min(10, len(all_questions))
-        random_questions = random.sample(all_questions, num_questions)
-
-        self.questions.clear()
-        self.questions.add(*random_questions)
-
     def __str__(self):
         return self.description
