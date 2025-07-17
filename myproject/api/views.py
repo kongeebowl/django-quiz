@@ -2,11 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+
 
 
 from .models import Question, User,Choices, Quiz
@@ -25,7 +21,7 @@ class QuestionView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-class AwesomeQuestionView(APIView):
+class QuestionViewById(APIView):
     def get(self, request, pk):
         questions = Question.objects.filter(pk=pk)
         serializer = QuestionSerializer(questions, many=True)
@@ -78,7 +74,7 @@ class QuizView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-class AwesomeQuizView(APIView):
+class QuizViewById(APIView):
     def get(self, request, pk):
         quizzes = Quiz.objects.filter(pk=pk)
         serializer = QuizSerializer(quizzes, many=True)
@@ -90,20 +86,7 @@ class AwesomeQuizView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-class UserAuth(APIView):
-    def login_page(request):
-        if request.method == "POST":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-        
-        if not User.objects.filter(username=username).exists():
-            messages.error(request, 'Invalid Username')
-        
-        user = authenticate(username=username, password=password)
-        
-        if user is None:
-            messages.error(request, "Invalid Password")
-        else:
-            login(request, user)
-    
-    
+
+class CheckQuiz(APIView):
+    def get(self, request, id):
+        quiz = Quiz.objects.filter()
