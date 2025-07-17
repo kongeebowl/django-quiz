@@ -11,6 +11,11 @@ from django.contrib.auth.models import User
 
 from .models import Question, User,Choices, Quiz
 from .serializers import QuestionSerializer, UserSerializer,ChoicesSerializer,QuizSerializer
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.authentication import TokenAuthentication
+
 
 class QuestionView(APIView):
     def get(self, request):
