@@ -9,24 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-
-const data = ref([]);
 //use useFetch try ad figure it out because i get errors for some reason AUOWEGHAUIWEHAUIOWehUIOAWEHIOUEHAIOWUEHOIUAWEHOUI BHLFKBLKJSB
-async function getData() {
-  try {
-    const response = await fetch("http://127.0.0.1:8000/api/quizzes/");
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    data.value = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("There has been a problem with your fetch operation:", error);
-  }
-}
-
-onMounted(async () => {
-  await getData();
+const { data } = await useFetch("/api/questions", {
+  transform: (response) => response.data,
 });
 </script>

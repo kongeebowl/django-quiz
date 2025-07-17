@@ -45,9 +45,6 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=128)),
             ],
         ),
-        migrations.DeleteModel(
-            name='Item',
-        ),
         migrations.AddField(
             model_name='choices',
             name='question',
