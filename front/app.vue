@@ -1,3 +1,3 @@
 <template>
-  <div><NuxtPage /></div>
+  <div data-theme="coffee"><NuxtPage /></div>
 </template>

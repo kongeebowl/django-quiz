@@ -2,20 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+
 
 
 from .models import Question, User,Choices, Quiz
 from .serializers import QuestionSerializer, UserSerializer,ChoicesSerializer,QuizSerializer
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.authentication import TokenAuthentication
-
 
 class QuestionView(APIView):
     def get(self, request):
@@ -30,7 +21,7 @@ class QuestionView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-class AwesomeQuestionView(APIView):
+class QuestionViewById(APIView):
     def get(self, request, pk):
         questions = Question.objects.filter(pk=pk)
         serializer = QuestionSerializer(questions, many=True)
@@ -83,7 +74,7 @@ class QuizView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-class AwesomeQuizView(APIView):
+class QuizViewById(APIView):
     def get(self, request, pk):
         quizzes = Quiz.objects.filter(pk=pk)
         serializer = QuizSerializer(quizzes, many=True)
@@ -95,17 +86,7 @@ class AwesomeQuizView(APIView):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-class LoginView(APIView):
-    authentication_classes = []  
 
-    def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        user = authenticate(username=username, password=password)
-
-        if user:
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key})
-        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-    
-    
+class CheckQuiz(APIView):
+    def get(self, request, id):
+        quiz = Quiz.objects.filter()
