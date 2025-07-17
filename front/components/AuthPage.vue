@@ -45,7 +45,6 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-export interface User{username:string,email:string,password:string}
 const props = defineProps<{
     users:User[]|null
 }>()

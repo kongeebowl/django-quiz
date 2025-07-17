@@ -6,8 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import type {User} from'@/components/AuthPage.vue'
 const data = ref<User[]|null>(null)
 async function getUsers(){
     try {
