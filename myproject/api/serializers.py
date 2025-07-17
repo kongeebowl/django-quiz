@@ -4,12 +4,6 @@ import random
 from .models import Question, User,Choices, Quiz
 
 
-class QuestionSerializer(serializers.ModelSerializer):
-    answer = serializers.CharField(write_only=True)
-    class Meta:
-        model = Question
-        fields = ['id', 'question_text', 'answer']
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -18,6 +12,13 @@ class ChoicesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Choices
         fields = '__all__'
+
+class QuestionSerializer(serializers.ModelSerializer):
+    answer = serializers.CharField(write_only=True)
+    choices = ChoicesSerializer(many=True)
+    class Meta:
+        model = Question
+        fields = ['id', 'question_text', 'answer', 'choices']
 
 class QuizSerializer(serializers.ModelSerializer):
 
