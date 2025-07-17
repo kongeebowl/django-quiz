@@ -1,11 +1,9 @@
-from rest_framework.response import Response
-from .models import User
-from .serializers import UserSerializer 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate
-from rest_framework import status
+from .models import User
+from .serializers import UserSerializer
+
+
 
 from .models import Question, User,Choices, Quiz
 from .serializers import QuestionSerializer, UserSerializer,ChoicesSerializer,QuizSerializer
@@ -85,21 +83,20 @@ class QuizViewById(APIView):
     def post(self, request, pk):
         serializer = QuizSerializer(data=request.data)
         if serializer.is_valid():
-            serialiizer.save()
+            serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-class LoginView(APIView):
-    authentication_classes = []  # No auth needed to log in
+class CheckQuiz(APIView):
+    def get(self, request, pk):
+        question = Question.objects.filter(pk=pk)
+        choices = Choices.objects.filter(pk=pk)
+        
 
-    def get(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        user = authenticate(username=username, password=password)
- 
-        if user:
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key})
-        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-    
-    
+        '''
+        get the question
+        get the choices
+        compare the two == OMG
+        yahoo its working???
+        '''
+        
