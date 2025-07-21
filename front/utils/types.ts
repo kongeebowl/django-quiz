@@ -1,9 +1,3 @@
-export type Question = {
-    id: number;
-    question_text: string;
-    answer: string;
-}
-
 export type Choice = {
     id: number;
     choice_text: string;
@@ -18,5 +12,17 @@ export type Quiz = {
     quiz_number: number;
 }
 
+export type Question = {
+    id: number;
+    question_text: string;
+    answer?: string;
+  }
+  
+export type CheckResponse = {
+    correct: boolean;
+    message: string;
+    user_answer: string;
+    correct_answer: string;
+  }
 
 

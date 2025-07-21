@@ -5,8 +5,8 @@ from .serializers import UserSerializer
 
 
 
-from .models import Question, User,Choices, Quiz
-from .serializers import QuestionSerializer, UserSerializer,ChoicesSerializer,QuizSerializer
+from .models import Question, User, Quiz
+from .serializers import QuestionSerializer, UserSerializer,QuizSerializer, AnswerSerializer
 
 class QuestionView(APIView):
     def get(self, request):
@@ -47,20 +47,6 @@ class UsersView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)  
 
-class ChoicesView(APIView):
-    def get(self, request):
-        users = Choices.objects.all()
-        serializer = ChoicesSerializer(users, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = ChoicesSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)  
-
-
 class QuizView(APIView):
     def get(self, request):
         quizzes = Quiz.objects.all()
@@ -88,9 +74,24 @@ class QuizViewById(APIView):
         return Response(serializer.errors, status=400)
 
 class CheckQuiz(APIView):
-    def get(self, request, pk):
-        question = Question.objects.filter(pk=pk)
-        choices = Choices.objects.filter(pk=pk)
+    def post(self, request, pk):
+        question = Question.objects.get(pk=pk)
+        
+        answer = AnswerSerializer(question)
+        user_answer = request.data.get("user_answer", "")
+
+        correct_answer = question.answer.strip().lower()
+        submitted_answer = user_answer.strip().lower()
+
+        is_correct = submitted_answer == correct_answer
+
+        return Response({
+            "correct": is_correct,
+            "message": "Correct!" if is_correct else "Incorrect.",
+            "user_answer": user_answer,
+            "correct_answer": question.answer
+        })
+        
         
 
         '''
@@ -98,5 +99,6 @@ class CheckQuiz(APIView):
         get the choices
         compare the two == OMG
         yahoo its working???
+        this is not suyper sigma 
         '''
         
