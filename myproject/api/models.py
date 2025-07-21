@@ -1,5 +1,4 @@
 from django.db import models
-import random
 
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)
@@ -18,13 +17,6 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
-
-class Choices(models.Model):
-    choice_text = models.CharField(max_length=150, unique=True)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='choices', null=True, blank=True)
-
-    def __str__(self):
-        return self.choice_text
 
 class Quiz(models.Model):
     description = models.CharField(max_length=255)

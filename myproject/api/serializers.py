@@ -1,23 +1,25 @@
 from rest_framework import serializers
 from .models import User
 import random
-from .models import Question, User,Choices, Quiz
+from .models import Question, User, Quiz
 
-
-class QuestionSerializer(serializers.ModelSerializer):
-    answer = serializers.CharField(write_only=True)
-    class Meta:
-        model = Question
-        fields = ['id', 'question_text', 'answer']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-class ChoicesSerializer(serializers.ModelSerializer):
+
+
+
+class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Choices
-        fields = '__all__'
+        model = Question
+        fields = ['id', 'question_text']
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ['answer']
 
 class QuizSerializer(serializers.ModelSerializer):
 
