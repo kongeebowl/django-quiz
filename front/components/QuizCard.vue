@@ -6,6 +6,7 @@
       v-model="userAnswer"
       type="text"
       placeholder="Type your answer here"
+      @keydown.enter.prevent="submitAnswer"
       class="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
 
