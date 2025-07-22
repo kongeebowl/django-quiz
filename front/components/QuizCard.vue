@@ -19,12 +19,7 @@
     </button>
 
     <div v-if="result" class="mt-6">
-      <p
-        :class="[
-          result.correct ? 'text-success' : 'text-error',
-          'text-lg font-medium mb-2',
-        ]"
-      >
+      <p class="text-lg font-medium mb-2">
         {{ result.message }}
       </p>
     </div>
