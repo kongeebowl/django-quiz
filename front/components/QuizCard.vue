@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+  <div class="max-w-xl mx-auto p-6 bg-base-200 rounded-lg shadow-md mt-10">
     <h2 class="text-2xl font-semibold mb-4">{{ question.question_text }}</h2>
 
     <input
@@ -19,12 +19,7 @@
     </button>
 
     <div v-if="result" class="mt-6">
-      <p
-        :class="[
-          result.correct ? 'text-success' : 'text-error',
-          'text-lg font-medium mb-2',
-        ]"
-      >
+      <p class="text-lg font-medium mb-2">
         {{ result.message }}
       </p>
     </div>
